@@ -284,7 +284,27 @@ const ChatBox: React.FC<ChatBoxProps> = ({ avatar, sessionId, onEndChat, readyQu
       )}
 
       {/* Chat Messages */}
-      <div style={{ maxWidth: 480, margin: '0 auto', padding: '80px 0 90px 0', width: '100vw', overflowY: 'auto' }}>
+      <div
+        style={{
+          maxWidth: 480,
+          margin: '0 auto',
+          width: '100vw',
+          overflowY: 'auto',
+          position: 'fixed',
+          top: 64, // height of top bar
+          left: 0,
+          right: 0,
+          bottom: 70, // height of input bar (approx)
+          padding: window.innerWidth <= 600 ? '12px 0 12px 0' : '80px 0 90px 0',
+          zIndex: 10,
+          background: '#fafbfc',
+          boxSizing: 'border-box',
+          height: `calc(100vh - 64px - 70px)`,
+          minHeight: 0,
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
         {messages.map((message, idx) => (
           <div key={message.id} style={{
             display: 'flex',
