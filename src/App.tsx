@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from "react-router-dom";
-import Categories from "./components/categories";
+import Categories from "./components/Categories";
 import AvatarSelection from "./components/AvatarSelection";
 
 function App() {
