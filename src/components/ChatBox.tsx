@@ -80,7 +80,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({ avatar, sessionId, onEndChat, readyQu
         body: JSON.stringify({
           message: userMessage.content,
           avatar: avatar.name,
-          categoryName: categoryName,
+          categoryName: categoryName, // FIX: send the actual category name string
           answerLength: answerLength,
           messages: messages.map(msg => ({ sender: msg.sender, content: msg.content }))
         })
