@@ -56,7 +56,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ title, subtitle, image, sub
   );
 }
 
-export default CategoryCard;
+export default CategoryCard; 
 
 // Add the following CSS to index.css or a relevant CSS file:
 // .category-card:hover {
