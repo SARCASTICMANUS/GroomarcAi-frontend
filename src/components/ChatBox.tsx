@@ -68,10 +68,13 @@ const ChatBox: React.FC<ChatBoxProps> = ({ avatar, sessionId, onEndChat, readyQu
     setIsLoading(true);
     setTimeout(() => setShowQuestions(false), 100);
 
+    // Get backend API URL from env, fallback to render URL
+    const apiUrl = import.meta.env.VITE_API_URL || 'https://groomarcai-backend.onrender.com';
+
     try {
       setIsTyping(true);
       // 1. Get prompt from backend
-      const backendRes = await fetch('/api/puter-chat', {
+      const backendRes = await fetch(`${apiUrl}/api/puter-chat`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -105,7 +108,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({ avatar, sessionId, onEndChat, readyQu
           timestamp: new Date()
         }]);
         // 3. (Optional) Log result to backend
-        await fetch('/api/puter-result', {
+        await fetch(`${apiUrl}/api/puter-result`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
