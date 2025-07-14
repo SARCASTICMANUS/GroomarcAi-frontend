@@ -73,6 +73,14 @@ const ChatBox: React.FC<ChatBoxProps> = ({ avatar, sessionId, onEndChat, readyQu
 
     try {
       setIsTyping(true);
+      // Debug: log the data being sent to backend
+      console.log({
+        message: userMessage.content,
+        avatar: avatar.name,
+        categoryName: categoryName,
+        answerLength: answerLength,
+        messages: messages.map(msg => ({ sender: msg.sender, content: msg.content }))
+      });
       // 1. Get prompt from backend
       const backendRes = await fetch(`${apiUrl}/api/puter-chat`, {
         method: 'POST',
@@ -80,7 +88,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({ avatar, sessionId, onEndChat, readyQu
         body: JSON.stringify({
           message: userMessage.content,
           avatar: avatar.name,
-          categoryName: categoryName, // FIX: send the actual category name string
+          categoryName: categoryName, // FIX: send the actual category name string from prop
           answerLength: answerLength,
           messages: messages.map(msg => ({ sender: msg.sender, content: msg.content }))
         })
@@ -188,7 +196,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({ avatar, sessionId, onEndChat, readyQu
 
   // --- UI ---
   return (
-    <div style={{ background: '#fafbfc', minHeight: '100vh', padding: 0, margin: 0 }}>
+    <div style={{ background: '#fafbfc', minHeight: '100vh', padding: 0, margin: 0, width: '100vw', maxWidth: '100vw', overflowX: 'hidden' }}>
       {/* Top Bar */}
       <div style={{
         display: 'flex', alignItems: 'center', padding: '18px 16px 12px 16px', background: '#fff', borderBottom: '1px solid #eee',
@@ -240,7 +248,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({ avatar, sessionId, onEndChat, readyQu
       )}
 
       {/* Chat Messages */}
-      <div style={{ maxWidth: 480, margin: '0 auto', padding: '16px 0 90px 0' }}>
+      <div style={{ maxWidth: 480, margin: '0 auto', padding: '16px 0 90px 0', width: '100vw' }}>
         {messages.map((message) => (
           <div key={message.id} style={{
             display: 'flex', flexDirection: message.sender === 'user' ? 'row-reverse' : 'row', alignItems: 'flex-end', marginBottom: 16
@@ -251,6 +259,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({ avatar, sessionId, onEndChat, readyQu
               borderRadius: 18,
               padding: '14px 18px',
               maxWidth: 320,
+              width: '90vw',
               fontSize: 16,
               fontWeight: 500,
               boxShadow: message.sender === 'user' ? '0 2px 8px rgba(214,240,0,0.10)' : 'none',
@@ -299,7 +308,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({ avatar, sessionId, onEndChat, readyQu
           boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
           display: 'flex',
           alignItems: 'center',
-          width: 420,
+          width: '100%',
           maxWidth: '95vw',
           padding: '6px 12px',
         }}>
