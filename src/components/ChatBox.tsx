@@ -68,8 +68,8 @@ const ChatBox: React.FC<ChatBoxProps> = ({ avatar, sessionId, onEndChat, readyQu
     setIsLoading(true);
     setTimeout(() => setShowQuestions(false), 100);
 
-    // Get backend API URL from env, fallback to render URL
-    const apiUrl = import.meta.env.VITE_API_URL || 'https://groomarcai-backend.onrender.com';
+    // Get backend API URL from env, fallback to local if not set
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
     try {
       setIsTyping(true);
