@@ -224,43 +224,47 @@ const ChatBox: React.FC<ChatBoxProps> = ({ avatar, sessionId, onEndChat, readyQu
       </div>
       {/* Ask Now Section */}
       {!firstUserMessageSent && readyQuestions && readyQuestions.length > 0 && showQuestions && (
-        <div style={{
-          position: 'fixed',
-          top: 110,
-          left: 0,
-          width: '100vw',
-          zIndex: 99,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'flex-start',
-          pointerEvents: 'none',
-        }}>
-          <div style={{
-            pointerEvents: 'auto',
-            background: '#fff',
-            borderRadius: 18,
-            boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
-            padding: '18px 10px',
-            width: 320,
-            maxWidth: '95vw',
-            border: '1px solid #f7b500',
+        <div
+          style={{
+            position: 'fixed',
+            top: 110,
+            left: 0,
+            width: '100vw',
+            zIndex: 99,
             display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}>
-            <div style={{ color: '#f7b500', fontWeight: 700, fontSize: 18, marginBottom: 2, width: '100%', textAlign: 'left' }}>Ask now!</div>
-            <div style={{ fontWeight: 600, fontSize: 15, color: '#222', marginBottom: 14, width: '100%', textAlign: 'left' }}>Your personal style guide is here!</div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: '100%' }}>
+            justifyContent: 'center',
+            alignItems: 'flex-start',
+            pointerEvents: 'none',
+          }}
+        >
+          <div
+            style={{
+              pointerEvents: 'auto',
+              background: '#fff',
+              borderRadius: 18,
+              boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+              padding: '14px 6px',
+              width: window.innerWidth <= 600 ? 240 : 320, // Small on mobile, large on desktop
+              maxWidth: window.innerWidth <= 600 ? '95vw' : '95vw',
+              border: '1px solid #f7b500',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <div style={{ color: '#f7b500', fontWeight: 700, fontSize: 16, marginBottom: 2, width: '100%', textAlign: 'left' }}>Ask now!</div>
+            <div style={{ fontWeight: 600, fontSize: 13, color: '#222', marginBottom: 10, width: '100%', textAlign: 'left' }}>Your personal style guide is here!</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, width: '100%' }}>
               {readyQuestions.map((q, idx) => (
                 <button
                   key={idx}
                   style={{
-                    border: '1.5px solid #d6f000',
+                    border: '1.2px solid #d6f000',
                     background: '#fff',
                     color: '#222',
-                    borderRadius: 16,
-                    padding: '10px 8px',
-                    fontSize: 15,
+                    borderRadius: 14,
+                    padding: '7px 4px',
+                    fontSize: 13,
                     fontWeight: 500,
                     textAlign: 'center',
                     cursor: 'pointer',
@@ -337,20 +341,23 @@ const ChatBox: React.FC<ChatBoxProps> = ({ avatar, sessionId, onEndChat, readyQu
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          padding: '0 0 18px 0',
+          padding: '0 0 10px 0',
         }}
       >
-        <div style={{
-          background: '#fff',
-          borderRadius: 32,
-          boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
-          display: 'flex',
-          alignItems: 'center',
-          width: 340,
-          maxWidth: '95vw',
-          padding: '6px 12px',
-          border: '1px solid #eee',
-        }}>
+        <div
+          style={{
+            background: '#fff',
+            borderRadius: 32,
+            boxShadow: '0 2px 12px rgba(0,0,0,0.06)',
+            display: 'flex',
+            alignItems: 'center',
+            width: '100%',
+            maxWidth: 480,
+            minWidth: 0,
+            padding: '6px 8px',
+            border: '1px solid #eee',
+          }}
+        >
           <input
             type="text"
             className="input-field"
@@ -367,6 +374,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({ avatar, sessionId, onEndChat, readyQu
               background: 'transparent',
               flex: 1,
               padding: '10px 8px',
+              minWidth: 0,
             }}
           />
           <button
