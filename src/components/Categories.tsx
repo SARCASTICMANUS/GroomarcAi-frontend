@@ -17,7 +17,7 @@ import AccessoriesStyling from '../assets/Accessories.svg';
 import Modeling from '../assets/Modeling.svg';
 import MakeupArtist from '../assets/Makeup_Artist.svg';
 
-const cards = [
+const cards = [ 
   {
     text: "Closet-Setting",
     image: Closet,
