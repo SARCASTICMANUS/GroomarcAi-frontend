@@ -2,10 +2,10 @@ import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import type { Avatar } from "../types";
 import ChatBox from "./ChatBox";
-import PersonalStylingImg from '../assets/Personal_stylin.svg';
-import GroomingImg from '../assets/Grooming.svg';
-import FitnessImg from '../assets/fitnes.svg';
-import SkincareImg from '../assets/Skincare.svg';
+import RheaImg from '../assets/Rhea_Kapoor.png';
+import TaniaImg from '../assets/Tania_arora.png';
+import AaravImg from '../assets/Aarav_Verma.png';
+import KabirImg from '../assets/Kabir.png';
 
 const avatars: Avatar[] = [
   {
@@ -14,7 +14,7 @@ const avatars: Avatar[] = [
     rating: 5,
     categories: ["Closet-Setting", "Personal-Styling", "Event Styling", "Personal Branding", "Grooming", "Travel Styling", "Accessories Styling", "Fashion Designer"],
     role: "Fashion & Grooming Stylist",
-    image: PersonalStylingImg,
+    image: RheaImg,
     behavior: {
       greetingStyle: "Hey love, Rhea here — your glam BFF 💄✨"
     }
@@ -25,7 +25,7 @@ const avatars: Avatar[] = [
     rating: 4,
     categories: ["Grooming", "Haircare", "Fragrance", "Personal Care"],
     role: "Men's Grooming Expert",
-    image: GroomingImg,
+    image: AaravImg,
     behavior: {
       greetingStyle: "What's up, bro? Aarav here to help you look your best 👨‍💼"
     }
@@ -36,7 +36,7 @@ const avatars: Avatar[] = [
     rating: 4,
     categories: ["Health And Fitness", "Modeling"],
     role: "Fitness & Wellness Coach",
-    image: FitnessImg,
+    image: KabirImg,
     behavior: {
       greetingStyle: "Hey there! Kabir here to help you crush your fitness goals 💪"
     }
@@ -47,7 +47,7 @@ const avatars: Avatar[] = [
     rating: 5,
     categories: ["Skincare", "Personal Care", "Makeup Artist"],
     role: "Skincare & Beauty Expert",
-    image: SkincareImg,
+    image: TaniaImg,
     behavior: {
       greetingStyle: "Hi gorgeous! Tania here to help you glow from within ✨"
     }
@@ -101,49 +101,59 @@ const AvatarSelection = () => {
         <button
           onClick={() => window.history.back()}
           style={{
-            display: 'flex',
+            display: 'inline-flex',
             alignItems: 'center',
-            background: 'none',
+            justifyContent: 'center',
+            background: '#d6f000',
             border: 'none',
-            color: '#666',
-            fontSize: '16px',
-            fontWeight: 500,
+            borderRadius: '50%',
+            width: 40,
+            height: 40,
+            color: '#fff',
+            fontSize: '20px',
+            fontWeight: 700,
             cursor: 'pointer',
-            transition: 'color 0.2s'
+            boxShadow: '0 1px 4px #eee',
+            transition: 'background 0.2s, color 0.2s',
+            padding: 0
           }}
-          onMouseOver={(e) => e.currentTarget.style.color = '#333'}
-          onMouseOut={(e) => e.currentTarget.style.color = '#666'}
+          onMouseOver={e => { e.currentTarget.style.background = '#b5c800'; e.currentTarget.style.color = '#fff'; }}
+          onMouseOut={e => { e.currentTarget.style.background = '#d6f000'; e.currentTarget.style.color = '#fff'; }}
+          aria-label="Back"
         >
-          <span style={{ fontSize: '20px', marginRight: '8px' }}>←</span>
-          Back to Categories
+          <span style={{ fontSize: '22px', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%', color: '#fff' }}>&larr;</span>
         </button>
       </div>
       
-      <h1 style={{ fontSize: 28, fontWeight: 700, marginBottom: 24 }}>Avatars for {category}</h1>
+      <h1 style={{ fontSize: 32, fontWeight: 800, marginBottom: 24, marginTop: 0, letterSpacing: '-1px' }}>{category}</h1>
       {filteredAvatars.length === 0 && <div>No avatars available for this category.</div>}
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 20, justifyContent: 'center', alignItems: 'flex-start' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 32, justifyContent: 'center', alignItems: 'flex-start' }}>
         {filteredAvatars.map((avatar, idx) => (
-          <div key={idx} style={{ minWidth: 220, background: '#fff', borderRadius: 12, boxShadow: '0 2px 8px #eee', padding: 18, textAlign: 'center' }}>
-            <img src={avatar.image} alt={avatar.name} style={{ width: 80, height: 80, borderRadius: '50%', objectFit: 'cover', marginBottom: 12 }} />
-            <div style={{ fontWeight: 700, fontSize: 20 }}>{avatar.name}</div>
-            <div style={{ color: '#888', fontSize: 15, marginBottom: 8 }}>{avatar.role}</div>
-            <div style={{ color: '#555', fontSize: 14, marginBottom: 16 }}>{avatar.persona}</div>
+          <div key={idx} style={{ minWidth: 280, maxWidth: 340, background: '#fff', borderRadius: 18, boxShadow: '0 4px 16px #eee', padding: 32, textAlign: 'center', height: 420, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-start' }}>
+            <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+              <img src={avatar.image} alt={avatar.name} style={{ width: 120, height: 120, borderRadius: '50%', objectFit: 'cover', marginBottom: 18, border: '3px solid #f6f6f6', boxShadow: '0 2px 8px #e0e0e0' }} />
+            </div>
+            <div style={{ fontWeight: 700, fontSize: 26, marginBottom: 6 }}>{avatar.name}</div>
+            <div style={{ color: '#888', fontSize: 18, marginBottom: 10 }}>{avatar.role}</div>
+            <div style={{ color: '#555', fontSize: 16, marginBottom: 24 }}>{avatar.persona}</div>
             <button
               onClick={() => handleStartChat(avatar)}
               style={{
-                background: '#007bff',
-                color: 'white',
+                background: '#d6f000',
+                color: '#222',
                 border: 'none',
-                borderRadius: 8,
-                padding: '10px 20px',
-                fontSize: 14,
-                fontWeight: 600,
+                borderRadius: 10,
+                padding: '14px 0',
+                fontSize: 18,
+                fontWeight: 700,
                 cursor: 'pointer',
                 width: '100%',
-                transition: 'background 0.2s'
+                transition: 'background 0.2s',
+                marginTop: 'auto',
+                boxShadow: '0 2px 8px #e0e0e0'
               }}
-              onMouseOver={(e) => e.currentTarget.style.background = '#0056b3'}
-              onMouseOut={(e) => e.currentTarget.style.background = '#007bff'}
+              onMouseOver={e => (e.currentTarget.style.background = '#b5c800')}
+              onMouseOut={e => (e.currentTarget.style.background = '#d6f000')}
             >
               Start Chat
             </button>
