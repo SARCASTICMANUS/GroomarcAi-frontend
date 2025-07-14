@@ -11,4 +11,4 @@ export function loadScript(src: string, globalName: string): Promise<void> {
     script.onerror = () => reject(new Error('Failed to load script: ' + src));
     document.body.appendChild(script);
   });
-} 
+}
