@@ -66,7 +66,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({ avatar, sessionId, onEndChat, readyQu
     setMessages(prev => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
-    setTimeout(() => setShowQuestions(false), 100);
+    setShowQuestions(false);
 
     // Get backend API URL from env, fallback to local if not set
     const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000';
@@ -165,6 +165,7 @@ const ChatBox: React.FC<ChatBoxProps> = ({ avatar, sessionId, onEndChat, readyQu
 
   // Helper to render AI messages as lists if possible
   function renderAIMessage(content: string) {
+    if (!content) return 'No response.';
     const lines = content.split(/\r?\n/).filter(line => line.trim() !== '');
     const isNumberedList = lines.length > 1 && lines.every(line => /^\d+\./.test(line.trim()));
     const isBulletedList = lines.length > 1 && lines.every(line => /^[-*]\s/.test(line.trim()));
@@ -339,7 +340,14 @@ const ChatBox: React.FC<ChatBoxProps> = ({ avatar, sessionId, onEndChat, readyQu
           </div>
         ))}
         {isTyping && (
-          <div style={{ color: '#888', fontSize: 15, margin: '12px 0 0 12px' }}>{avatar.name} is typing...</div>
+          <div style={{ color: '#888', fontSize: 15, margin: '12px 0 0 12px', display: 'flex', alignItems: 'center', gap: 6 }}>
+            <span>{avatar.name} is typing</span>
+            <span style={{ display: 'inline-block', width: 24 }}>
+              <span className="typing-dot" style={{ display: 'inline-block', width: 6, height: 6, borderRadius: '50%', background: '#bbb', marginRight: 2, animation: 'blink 1s infinite alternate' }}></span>
+              <span className="typing-dot" style={{ display: 'inline-block', width: 6, height: 6, borderRadius: '50%', background: '#bbb', marginRight: 2, animation: 'blink 1s 0.2s infinite alternate' }}></span>
+              <span className="typing-dot" style={{ display: 'inline-block', width: 6, height: 6, borderRadius: '50%', background: '#bbb', animation: 'blink 1s 0.4s infinite alternate' }}></span>
+            </span>
+          </div>
         )}
         <div ref={messagesEndRef} />
       </div>
